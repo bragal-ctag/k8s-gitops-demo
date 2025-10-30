@@ -4,13 +4,14 @@ kind: Kustomization
 namespace: prod
 namePrefix: prod-
 
-bases:
+resources:
   - ../../base
 
-patchesStrategicMerge:
-  - replica-patch.yaml
-  - configmap-patch.yaml
-  - ingress-patch.yaml
+patches:
+  - path: replica-patch.yaml
+  - path: configmap-patch.yaml
+  - path: ingress-patch.yaml
 
-commonLabels:
-  environment: prod
+labels:
+  - pairs:
+      environment: prod
