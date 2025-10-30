@@ -4,13 +4,14 @@ kind: Kustomization
 namespace: staging
 namePrefix: staging-
 
-bases:
+resources:
   - ../../base
 
-patchesStrategicMerge:
-  - replica-patch.yaml
-  - configmap-patch.yaml
-  - ingress-patch.yaml
+patches:
+  - path: replica-patch.yaml
+  - path: configmap-patch.yaml
+  - path: ingress-patch.yaml
 
-commonLabels:
-  environment: staging
+labels:
+  - pairs:
+      environment: staging
